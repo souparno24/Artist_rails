@@ -1,0 +1,36 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <%= link_to "sample app", root_path, id: "logo" %>
+    <nav>
+     
+    <ul class="nav navbar-nav navbar-right collapse navbar-collapse"
+        id="bs-example-navbar-collapse-1">
+        <li><%= link_to "Home", signup_path %></li>
+        <li> <%= link_to "Dashboard",dashboard_path,class: "nav-link"%></li>
+
+        <% if logged_in? %>
+   
+       <li><%= link_to "My profile",profile_path(current_user.name),class: "nav-link"%></li>
+         
+          <li class="nav-item" >
+    <%= link_to "New Artist",new_post_path,class: "nav-link"%>
+</li>
+       
+            
+           
+
+              <li class="divider"></li>
+              <li>
+                <%= link_to "Log out", logout_path, method: :delete %>
+              </li>
+          
+        
+        <% else %>
+        
+       
+          <li><%= link_to "Log in", login_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

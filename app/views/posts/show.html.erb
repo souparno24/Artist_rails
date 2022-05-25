@@ -1,0 +1,31 @@
+<h3><strong>Artist is created by <%=@post.user.name%></strong></h3>
+<h4><strong>Name of Artist:</strong><%=@post.name%></h4> 
+
+<h4><strong>Date of Birth</strong>:<%=@post.dob%></h4> 
+<h4><strong>This Artist is a <%=@post.category%></strong></h4> 
+<p><%=mail_to @post.email, 'Send mail' , class: "btn btn-sm btn-info" %></p>
+
+<%= embed(@post.url) %>
+
+<% if current_user.admin? %>  
+<li><%= link_to "Edit artist", edit_post_path(@post.id), class: "btn btn-sm btn-primary" %></li>
+    
+
+<%= link_to "delete", @post, method: :delete,class: "btn btn-sm btn-danger",
+data: { confirm: "You sure?" } %>
+<% end %>
+
+  <%=rating(@stars)%>
+
+    
+    <hr>
+ 
+
+
+
+<h3><strong><u>Reviews for the Artist</u></strong></h3>
+<hr>
+    <%@post.comments.each do |comment|%>
+        <h4><strong><%=comment.user.name%>:</strong><%=comment.comment%></h4>
+    <%end%>
+    <li><%= link_to "Back to Dashboard", dashboard_path, class: "btn btn-sm btn-info" %></li>

@@ -1,0 +1,22 @@
+<h1>Update Artist</h1>
+<%= form_with(model: @post, local: true) do |f| %>
+   
+  
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  
+    <%= f.label :email %>
+    <%= f.email_field :email, class: 'form-control' %>
+  
+    <%= f.label :dob %>
+    <%= f.date_field :dob, class: 'form-control' %>
+  
+    <%= f.label :category %>
+    <%= f.select:category,['Dancer', 'Singer','Painter','Writer','Novelist'] ,class: 'form-control' %>
+    <%= f.label :location %>
+    <%= f.text_field :location, class: 'form-control' %>
+    <%= f.label :url %>
+    <%= f.text_field :url, class: 'form-control' %>
+  
+    <%= f.submit "Update", class: "btn btn-primary" %>
+  <% end %>

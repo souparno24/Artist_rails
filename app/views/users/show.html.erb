@@ -1,0 +1,21 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+        <%= gravatar_for @user %>
+        <h1><%=@user.name%></h1>
+       
+    <hr>
+    <br>   <br>
+    <p><h1><strong><%=@user.name%> has  created <%=@posts.size.to_s%> artists.</strong></h1></p>
+    <% @posts.each do |post|%>
+    
+        <li><strong>Name of Artist:</strong><%=post.name%></li>
+        <li><strong>Email id:</strong><%=post.email%></li>
+        <li><strong>This Artist is a <%=post.category%></strong></li>
+        <hr>
+        <%end%>
+
+        </section>
+        </aside>
+      </div>

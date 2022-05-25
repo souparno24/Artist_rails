@@ -1,0 +1,63 @@
+<div class="container">
+<div class="col-md-2 ">
+<%= form_for "",url: dashboard_path,role: "search",method: :get do%>
+    <%= text_field_tag :search,@search_term,placeholder: "Search..."%>
+<%end%>
+
+</div>
+<hr>
+
+
+<h3><strong><%="#{@posts.size.to_s} ARTISTS FOUND."%></strong></h3>
+<hr>
+
+    <div class="row">
+    <div class="col-md-6">
+         <% @posts.each do |post|%>
+             <li><strong>Artist is created by <%=post.user.name%></strong></li>
+            <li><strong>Name of Artist:</strong><%=post.name%></li>
+            <li><strong>Email id:</strong><%=post.email%></li>
+            <li><strong>This Artist is a <%=post.category%></strong></li> 
+          
+
+         
+
+            <li><h4>Total ratings:<span><%=rating(post.stars)%></span></h4></li>
+           
+            <h4><strong><u>Reviews</u></strong></h4>
+  
+         
+       
+            <%=render "posts/comments", post: post%>
+            
+            <% if logged_in? %>
+          
+            <%=form_for @star do |f|%>
+                <div class="input-group mb-3">
+                 <%=f.hidden_field :post_id,value:post.id%>
+                <%= f.label :star %>
+                <%= f.select:star,[1,2,3,4,5] ,class: 'form-control' %>
+                <span><%=f.submit "Post",class:"btn btn-success input-group-text pt-2"%></span> 
+                </div>
+            <%end%>
+    
+        <%=form_for @comment do |f|%>
+            <div class="input-group mb-3">
+            <%=f.hidden_field :post_id,value:post.id%>
+            <%=f.text_field :comment,placeholder: "Add review here",class:"form-control"%>
+            <span><%=f.submit "Post",class:"btn btn-success input-group-text pt-2"%></span> 
+            </div>
+        <%end%>
+        <li><%= link_to "View artist", post_path(post.id), class: "btn btn-sm btn-primary" %></li>
+        
+        <%end%>
+
+           
+    
+        <hr>
+    <%end%>
+    
+    </div>
+    
+    </div>
+</div>
