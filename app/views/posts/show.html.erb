@@ -3,17 +3,23 @@
 
 <h4><strong>Date of Birth</strong>:<%=@post.dob%></h4> 
 <h4><strong>This Artist is a <%=@post.category%></strong></h4> 
+<h4><strong>Description:<%=@post.description%></strong></h4> 
 <p><%=mail_to @post.email, 'Send mail' , class: "btn btn-sm btn-info" %></p>
 
-<%= embed(@post.url) %>
+<p><%= embed(@post.url) %></p>
+<div class="btn-group" role="group" aria-label="Basic example">
+<% if current_user.admin? %> 
 
-<% if current_user.admin? %>  
-<li><%= link_to "Edit artist", edit_post_path(@post.id), class: "btn btn-sm btn-primary" %></li>
+
+<%= link_to "Edit artist", edit_post_path(@post.id), class: "btn btn-sm btn-primary" %>
     
 
-<%= link_to "delete", @post, method: :delete,class: "btn btn-sm btn-danger",
+<%= link_to "delete", delete_path(@post.id), method: :delete,class: "btn btn-sm btn-danger",
 data: { confirm: "You sure?" } %>
+
 <% end %>
+</div>
+
 
   <%=rating(@stars)%>
 

@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_21_175131) do
-
-  create_table "artists", force: :cascade do |t|
-    t.integer "value"
-  end
+ActiveRecord::Schema.define(version: 2022_05_28_081333) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "post_id"
@@ -37,11 +33,8 @@ ActiveRecord::Schema.define(version: 2022_05_21_175131) do
     t.date "dob"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "description"
     t.index ["user_id"], name: "index_posts_on_user_id"
-  end
-
-  create_table "ratings", force: :cascade do |t|
-    t.float "evaluation", null: false
   end
 
   create_table "stars", force: :cascade do |t|

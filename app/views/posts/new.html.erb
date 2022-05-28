@@ -1,6 +1,6 @@
 <%= form_with(model: @post, local: true) do |f| %>
    
-  
+  <%= render 'shared/error_messages', object: f.object %>
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
   
@@ -9,9 +9,13 @@
   
     <%= f.label :dob %>
     <%= f.date_field :dob, class: 'form-control' %>
-  
+
+    <%= f.label :description %>
+    <%= f.text_area :description, placeholder: "Add description..." ,class: 'form-control'%>
+
     <%= f.label :category %>
     <%= f.select:category,['Dancer', 'Singer','Painter','Writer','Novelist'] ,class: 'form-control' %>
+    <br>
     <%= f.label :location %>
     <%= f.text_field :location, class: 'form-control' %>
     <%= f.label :url %>

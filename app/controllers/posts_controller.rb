@@ -1,11 +1,18 @@
 
   
 class PostsController < ApplicationController
-    before_action :admin_user, only: [:new,:create,:edit,:update]
+    before_action :admin_user, only: [:new,:create,:edit,:update,:destroy]
    
-  
+      
+  def index
+    @q = Post.ransack(params[:q])
+    @posts = @q.result
+    @comment=Comment.new
+    @star=Star.new
+  end
     def new
         @post=Post.new
+        
     end
 
     def create
@@ -16,7 +23,9 @@ class PostsController < ApplicationController
             redirect_to dashboard_path
             
         else
-            flash[:danger] = "artist not created!"
+          
+          render 'new'
+         
         end
 
     end
@@ -44,17 +53,19 @@ class PostsController < ApplicationController
 
       def destroy
         Post.find(params[:id]).destroy
-        flash[:success] = "Artist deleted"
+        flash[:danger] = "Artist deleted"
         redirect_to dashboard_path
       end
 
     private
 
     def post_params
-        params.require(:post).permit(:name,:email,:dob,:category,:location,:url)
+        params.require(:post).permit(:name,:email,:dob,:description,:category,:location,:url)
     end
     def admin_user
-        
+      if !current_user.admin?
+      flash[:danger] = "Not authorized"
+      end
         redirect_to(dashboard_path) unless current_user.admin?
        
       end
