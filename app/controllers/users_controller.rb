@@ -18,15 +18,22 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
-    if @user.save
+    if User.first
       @user.update(admin:false)
+    
+    end
+    if @user.save
+      
       log_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "Welcome to artist directory!!!!"
       redirect_to profile_path(@user.name)
     else
       render 'new'
     end
   end
+
+
+
 
   def edit
     @user = User.find(params[:id])
