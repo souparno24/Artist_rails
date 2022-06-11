@@ -10,13 +10,32 @@ class Post < ApplicationRecord
                       format: { with: VALID_EMAIL_REGEX },
                       uniqueness: true
                       
-                      
+    
     validates :dob, presence: true
+    validate :validate_age
+ 
+  
+
+  
+    
     validates :category, presence: true
+
     validates :location, presence: true
-    validates :url, presence: true
-    validates :description, presence: true
+
+    VALID_YT_REGEX = /[a-zA-Z0-9]+/
+    validates :url, 
+    format: { with: VALID_YT_REGEX },presence: true
+
+    validates :description,length: { maximum: 250 }, presence: true
     def self.search_by(search_term)
         where("LOWER(name) LIKE :search_term OR LOWER(category) LIKE :search_term",search_term: "%#{search_term.downcase}%")
     end
+    private
+
+  def validate_age
+      if dob.present? && dob > 18.years.ago.to_i
+          errors.add(:dob, 'You should be over 18 years old.')
+      end
+  end
 end
+

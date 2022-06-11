@@ -27,6 +27,10 @@ end
     !current_user.nil?
   end
 
+  def admin?
+    current_user.admin?
+  end
+
    # Logs out the current user.
    def log_out
     session.delete(:user_id)
