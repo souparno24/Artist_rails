@@ -13,16 +13,47 @@
     <hr>
     <br>   <br>
     <p><h1><strong><%=@user.name%> has  created <%=@posts.size.to_s%> artists.</strong></h1></p>
-    <% @posts.each do |post|%>
-    
-        <li><strong>Name of Artist:</strong><%=post.name%></li>
-        <li><strong>Email id:</strong><%=post.email%></li>
-        <li><strong>This Artist is a <%=post.category%></strong></li>
-        <hr>
-        <%end%>
+
+
+<div class="row">
+<div class="col-md-6">
+<%@comments.each do |comment|%>
+  <%if !comment.active%>
+   <h5><strong><%=comment.user.name%>:</strong><%=comment.comment%></h5>
+   <%= link_to "accept", accept_comment_path(comment.id), class: "btn btn-xs btn-success" %>
+   <%= link_to "reject", reject_comment_path(comment.id), method: :delete,class: "btn btn-xs btn-danger",
+   data: { confirm: "You sure?" } %>
+   <%end%>
+<%end%>
+
+</div>
+<div class="col-md-6">
+<%@stars.each do |star|%>
+  <%if !star.active%>
+   <h5><strong><%=star.user.name%>:</strong><%=star.star%> stars</h5>
+   <%= link_to "accept", accept_star_path(star.id), class: "btn btn-xs btn-success" %>
+   <%= link_to "reject", reject_star_path(star.id), method: :delete,class: "btn btn-xs btn-danger",
+   data: { confirm: "You sure?" } %>
+   <%end%>
+<%end%>
+
+</div>
+</div>
+   
+
+  
+   
+   
+      
+<hr>
+  
 
         <li><%= link_to "Back to Dashboard", dashboard_path, class: "btn btn-sm btn-info" %></li>
 
         </section>
         </aside>
       </div>
+
+
+      
+    

@@ -13,13 +13,14 @@
     <%= f.label :description %>
     <%= f.text_area :description, placeholder: "Add description..." ,class: 'form-control'%>
 
-    <%= f.label :category %>
-    <%= f.select:category,['Dancer', 'Singer','Painter','Writer','Novelist'] ,class: 'form-control' %>
+    
     <br>
     <%= f.label :location %>
     <%= f.text_field :location, class: 'form-control' %>
     <%= f.label :url %>
     <%= f.text_field :url, class: 'form-control' %>
-  
+
+
+ 
     <%= f.submit "submit", class: "btn btn-primary" %>
   <% end %>

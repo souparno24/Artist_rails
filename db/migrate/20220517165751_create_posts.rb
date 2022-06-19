@@ -6,7 +6,7 @@ class CreatePosts < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :email
       t.string :location
-      t.string :category
+    
       t.string :work
       t.string :url
       t.date :dob

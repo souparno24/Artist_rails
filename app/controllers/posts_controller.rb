@@ -5,10 +5,13 @@ class PostsController < ApplicationController
    
       
   def index
+
     @q = Post.ransack(params[:q])
+    @category=
     @posts = @q.result
     @comment=Comment.new
     @star=Star.new
+  
   end
     def new
         @post=Post.new
@@ -34,7 +37,9 @@ class PostsController < ApplicationController
        
         @post =Post.find(params[:id])
         @stars=@post.stars
-       
+        @image=Image.new
+        @category=Category.new
+      
     end
 
     def edit
@@ -57,10 +62,12 @@ class PostsController < ApplicationController
         redirect_to dashboard_path
       end
 
+    
+
     private
 
     def post_params
-        params.require(:post).permit(:name,:email,:dob,:description,:category,:location,:url)
+        params.require(:post).permit(:name,:email,:dob,:description,:location,:url)
     end
     def admin_user
       if !current_user.admin?

@@ -8,10 +8,30 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   get '/logout',  to: 'sessions#destroy'
  get 'delete/:id', to: 'posts#destroy', as: :delete
+ get 'categories/:id', to: 'categories#destroy', as: :delete_category
  
    resources :users
-  resources :posts
-  resources :comments, only: [:create,:destroy]
-  resources :stars, only: [:create,:destroy]
+  resources :posts 
+    
+  
+  resources :comments do
+    member do
+      get :accept
+      get :reject
+    end
+  end
+  resources :stars do
+    member do
+      get :accept
+      get :reject
+    end
+  end
+  resources :images do
+    member do 
+      get :purge_image
+      
+    end
+  end
+  resources :categories
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -10,12 +10,12 @@ user=User.first
 50.times do |n|
     name = Faker::Name.name
     email = "example-#{n+1}@railstutorial.org"
-    dob="2022-05-05"
+    dob="1960-08-08"
     
     description= Faker::Lorem.sentence(word_count: 15)
-    category="Dancer"
+    
     location="Kalyani"
     url="DmUO-w5ToVM"
 
-    user.posts.create!(name:name,email:email,dob:dob,description:description,category:category,location:location,url:url)
+    user.posts.create!(name:name,email:email,dob:dob,description:description,location:location,url:url)
 end

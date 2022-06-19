@@ -1,0 +1,9 @@
+<h1>Update Category</h1>
+<%= form_with(model: @category, local: true) do |f| %>
+   
+  
+    <%= f.label :category %>
+    <%= f.select:category,['Dancer', 'Singer','Painter','Writer','Novelist'] ,class: 'form-control' %>
+   
+    <%= f.submit "Update", class: "btn btn-xs btn-primary" %>
+  <% end %>

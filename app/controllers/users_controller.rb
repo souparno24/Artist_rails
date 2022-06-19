@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user, only: [:edit, :update]
   before_action :set_account,only: [:show]
+  before_action :admin_user,only: [:show]
   before_action :not_logged_in_user,only: [:new,:create]
 
  
@@ -9,7 +10,8 @@ class UsersController < ApplicationController
   def show
     @user=User.find_by_name(params[:name])
     @posts=@user.posts
-
+    @comments=Comment.all
+    @stars=Star.all
   end
 
   def new

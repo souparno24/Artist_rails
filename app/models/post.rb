@@ -1,5 +1,8 @@
 class Post < ApplicationRecord
+    
     belongs_to :user
+    has_one :category,dependent: :destroy
+    has_many :images,dependent: :destroy
     has_many :comments,dependent: :destroy
     has_many :stars,dependent: :destroy
 
@@ -18,8 +21,7 @@ class Post < ApplicationRecord
 
   
     
-    validates :category, presence: true
-
+  
     validates :location, presence: true
 
     VALID_YT_REGEX = /[a-zA-Z0-9]+/
@@ -27,15 +29,19 @@ class Post < ApplicationRecord
     format: { with: VALID_YT_REGEX },presence: true
 
     validates :description,length: { maximum: 250 }, presence: true
-    def self.search_by(search_term)
-        where("LOWER(name) LIKE :search_term OR LOWER(category) LIKE :search_term",search_term: "%#{search_term.downcase}%")
-    end
+   
+
+
+
+   
     private
 
   def validate_age
-      if dob.present? && dob > 18.years.ago.to_i
-          errors.add(:dob, 'You should be over 18 years old.')
+      if (Date.today.year-dob.year<18)
+          errors.add(:dob, 'Artist should be atleast 18 years old.')
       end
   end
+
+
 end
 
