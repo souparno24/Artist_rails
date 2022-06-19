@@ -4,7 +4,8 @@
         <h3><strong>Artist is created by <%=@post.user.name%></strong></h3>
         <h4><strong>Name of Artist:</strong><%=@post.name%></h4> 
         
-        <h4><strong>Date of Birth</strong>:<%=@post.dob%></h4> 
+        <h4><strong>Date of Birth</strong>:<%=@post.dob%></h4>
+        <h4><strong>Location </strong>:<%=@post.location%></h4>
        
         <h4><strong>Description:<%=@post.description%></strong></h4> 
         <p><%=mail_to @post.email, 'Send mail' , class: "btn btn-sm btn-info" %></p>
