@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-   
+    before_action :logged_in_user,only: [:create,:purge_image]
     before_action :admin_user,only: [:create,:purge_image]
 
     def create
@@ -27,6 +27,14 @@ class ImagesController < ApplicationController
     def image_params
         params.require(:image).permit(:image,:post_id)
     end
+
+    def logged_in_user
+        unless logged_in?
+          store_location
+          flash[:danger] = "Please log in."
+          redirect_to login_url
+        end
+      end
 
     def admin_user
         redirect_to(root_url) unless current_user.admin?

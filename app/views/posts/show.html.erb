@@ -15,7 +15,7 @@
         
         
         <div class="btn-group" role="group" aria-label="Basic example">
-        <% if current_user.admin? %> 
+        <% if logged_in? && current_user.admin? %> 
         
         
         <%= link_to "Edit artist", edit_post_path(@post.id), class: "btn btn-sm btn-primary" %>
@@ -23,8 +23,7 @@
         
         
         
-        <%= link_to "delete", delete_path(@post.id), method: :delete,class: "btn btn-sm btn-danger",
-        data: { confirm: "You sure?" } %>
+        <%= link_to "delete", post_path(@post.id), method: :delete,class: "btn btn-sm btn-danger",data: { confirm: "You sure?" }%>
         <% end %>
         </div>
         
@@ -52,7 +51,7 @@
             <hr>
                 <%if @post.category%>
                    <h4><strong>This Artist is a </strong><%=@post.category.category%></h4> 
-                     <% if current_user.admin? %> 
+                     <% if logged_in? && current_user.admin? %> 
         
         
                     <%= link_to "Edit category", edit_category_path(@post.category.id), class: "btn btn-xs btn-primary" %>
@@ -66,7 +65,7 @@
                
                 <%end%>
                 <hr>
-        <% if current_user.admin? %> 
+        <% if logged_in? && current_user.admin? %> 
             <%=form_for @category do |f|%>
                 <div class="input-group mb-3">
                 <%=f.hidden_field :post_id,value:@post.id%>
@@ -86,7 +85,7 @@
         </div>
         
         <div class="col-md-6">
-        <% if current_user.admin? %> 
+        <% if logged_in? && current_user.admin? %> 
         <%=form_for @image do |f|%>
             <div class="input-group mb-3">
             <%=f.hidden_field :post_id,value:@post.id%>

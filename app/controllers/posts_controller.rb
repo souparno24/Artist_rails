@@ -1,6 +1,7 @@
 
   
 class PostsController < ApplicationController
+  before_action :logged_in_user,only: [:new,:create,:edit,:show,:update,:destroy]
     before_action :admin_user, only: [:new,:create,:edit,:update,:destroy]
    
       
@@ -58,6 +59,7 @@ class PostsController < ApplicationController
 
       def destroy
         Post.find(params[:id]).destroy
+       
         flash[:danger] = "Artist deleted"
         redirect_to dashboard_path
       end
@@ -68,6 +70,13 @@ class PostsController < ApplicationController
 
     def post_params
         params.require(:post).permit(:name,:email,:dob,:description,:location,:url)
+    end
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
     end
     def admin_user
       if !current_user.admin?

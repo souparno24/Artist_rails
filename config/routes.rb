@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   get "profile/:name", to:"users#show", as: :profile
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
-  get '/logout',  to: 'sessions#destroy'
- get 'delete/:id', to: 'posts#destroy', as: :delete
+  delete '/logout',  to: 'sessions#destroy'
+
  get 'categories/:id', to: 'categories#destroy', as: :delete_category
  
    resources :users

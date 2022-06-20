@@ -1,5 +1,6 @@
 class StarsController < ApplicationController
-   
+    before_action :logged_in_user,only: [:create,:accept,:reject]
+    before_action :admin_user, only: [:create,:accept,:reject]
    
 
     def create
@@ -33,4 +34,20 @@ class StarsController < ApplicationController
     def star_params
         params.require(:star).permit(:star,:post_id)
     end
+
+
+    def logged_in_user
+        unless logged_in?
+          store_location
+          flash[:danger] = "Please log in."
+          redirect_to login_url
+        end
+      end
+      def admin_user
+        if !current_user.admin?
+        flash[:danger] = "Not authorized"
+        end
+          redirect_to(dashboard_path) unless current_user.admin?
+         
+        end
 end
